@@ -31,8 +31,8 @@
 <highlow> ::= "H" | "L"
 
 <function> ::= "sum"
-			       | <highlow>
-		      	 | "K" <highlow> <natural>
+             | <highlow>
+             | "K" <highlow> <natural>
              | "D" <highlow> <natural>
              | <explode> <times> <natural>
              | <explode> <times> <natural> <gorl> <integer>
