@@ -4,24 +4,25 @@
 
 <w> ::= " "*
 
-<commasepwhole> ::= <whole> | <whole> <w> "," <w> <commasepwhole>
-<distn> ::= "[" <w> <integer> <w> ";" <w> <commasepwhole> <w> "]"
-
-<dset> ::= "d" <natural> | <natural> "d" <natural> | "d%" | <natural> "d%" | "dF" | <natural> "dF"
+<wholelist> ::= <whole> | <whole> <w> "," <w> <wholelist>
+<distn> ::= "[" <w> <integer> <w> ";" <w> <wholelist> <w> "]"
+<dexpr> ::= "d" <natural> | <natural> "d" <natural> | "d%" | <natural> "d%" | "dF" | <natural> "dF"
 <const> ::= <integer>
-<simpleset> ::= <distn> | <dset> | <const>
-<commasepdistn> ::= <set> | <set> <w> "," <w> <commasepdistn>
-<set> ::= <simpleset>
-        | "{" <w> <commasepdistn> <w> "}"
-        | <set> <w> "+" <w> <set>
-        | <set> <w> "-" <w> <set>
-        | <set> <function>
+<distnlist> ::= <multiset> | <multiset> <w> "," <w> <distnlist>
 
-<ge> ::= ">="
+<multiset> ::= <distn> 
+             | <const>
+             | <dexpr> 
+             | "{" <w> <distnlist> <w> "}"
+             | <multiset> <w> "+" <w> <multiset>
+             | <multiset> <w> "-" <w> <multiset>
+             | <multiset> <function>
 
 <le> ::= "<="
 
-<gorl> ::= <ge> | <le>
+<ge> ::= ">="
+
+<gorl> ::= <le> | <ge>
 
 <explode> ::= "X" | "!"
 
@@ -37,4 +38,3 @@
              | <explode> <times> <natural> <gorl> <integer>
              | "R" <gorl> <integer>
              | "R" <times> <natural> <gorl> <integer>
-             
