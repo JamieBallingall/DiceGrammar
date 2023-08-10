@@ -1,0 +1,40 @@
+<natural> ::= [1-9] [0-9]*
+<whole> ::= "0" | <natural>
+<integer> ::= "-" <natural> | <natural>
+
+<w> ::= " "*
+
+<commasepwhole> ::= <whole> | <whole> <w> "," <w> <commasepwhole>
+<distn> ::= "[" <w> <integer> <w> ";" <w> <commasepwhole> <w> "]"
+
+<dset> ::= "d" <natural> | <natural> "d" <natural> | "d%" | <natural> "d%" | "dF" | <natural> "dF"
+<const> ::= <integer>
+<simpleset> ::= <distn> | <dset> | <const>
+<commasepdistn> ::= <set> | <set> <w> "," <w> <commasepdistn>
+<set> ::= <simpleset>
+        | "{" <w> <commasepdistn> <w> "}"
+        | <set> <w> "+" <w> <set>
+        | <set> <w> "-" <w> <set>
+        | <set> <function>
+
+<ge> ::= ">="
+
+<le> ::= "<="
+
+<gorl> ::= <ge> | <le>
+
+<explode> ::= "X" | "!"
+
+<times> ::= "x" | "*"
+
+<highlow> ::= "H" | "L"
+
+<function> ::= "sum"
+			       | <highlow>
+		      	 | "K" <highlow> <natural>
+             | "D" <highlow> <natural>
+             | <explode> <times> <natural>
+             | <explode> <times> <natural> <gorl> <integer>
+             | "R" <gorl> <integer>
+             | "R" <times> <natural> <gorl> <integer>
+             
